@@ -1,11 +1,10 @@
-import React, { useCallback } from 'react';
+import React,{ useState, useCallback } from 'react';
 import * as style from '../styles/user/signUpStyle'
 import Head from "next/head";
 import { Checkbox, Form, Input, Button } from 'antd';
 import styled from 'styled-components';
 
 import useInput from '../shared/useInput';
-import { useState } from 'react';
 // import { SIGN_UP_REQUEST } from '../reducers/user';
 import { useDispatch, useSelector } from 'react-redux';
 
@@ -121,4 +120,3 @@ const Signup = () => {
   );
 }
 
-export default Signup;

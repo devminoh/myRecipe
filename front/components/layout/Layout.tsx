@@ -6,7 +6,11 @@ import {
 } from '@ant-design/icons';
 import type { MenuProps } from 'antd';
 import { Breadcrumb, Layout, Menu } from 'antd';
+<<<<<<< HEAD
 import * as style from '../../styles/layoutStyle';
+=======
+import * as style from '../../styles/layout';
+>>>>>>> 2ba4eb7efdd106695123f78e6b01fa5b100e69f3
 import Link from 'next/link';
 
 const { Sider } = Layout;
@@ -43,7 +47,11 @@ const AppLayout = ({ children }: PropTypes) => {
   const [me, setMe] = useState(false);
 
   const items: MenuItem[] = [
+<<<<<<< HEAD
     getItem(me ? <Link href="/profile">회원정보</Link> : <Link href="/login">로그인&nbsp;/&nbsp;회원가입</Link>, '1', <UserOutlined />),
+=======
+    getItem(me ? <Link href="/profile">회원정보</Link> : <Link href="/login">로그인</Link>, '1', <UserOutlined />),
+>>>>>>> 2ba4eb7efdd106695123f78e6b01fa5b100e69f3
     getItem('한식', '레시피1', <SmileOutlined />, [
       getItem('면', '2'),
       getItem('국', '3'),

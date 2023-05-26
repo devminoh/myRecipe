@@ -3,5 +3,9 @@
   "/_document": "pages/_document.js",
   "/_error": "pages/_error.js",
   "/recipe/diet": "pages/recipe/diet.js",
+<<<<<<< HEAD
   "/": "pages/index.js"
+=======
+  "/login": "pages/login.js"
+>>>>>>> 2ba4eb7efdd106695123f78e6b01fa5b100e69f3
 }
