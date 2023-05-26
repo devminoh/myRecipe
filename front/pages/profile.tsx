@@ -1,8 +1,8 @@
 import React from "react";
-import Layout from '../components/layout/Layout';
+import UserProfile from "../components/user/UserProfile";
 
 const Profile = () => {
-  return <Layout>Hello, profile!</Layout>;
+  return <div><UserProfile /></div>;
 };
 
 export default Profile;
