@@ -5,13 +5,17 @@ import * as style from '../../styles/user/loginFormStyle';
 import useInput from '../../shared/useInput';
 import Link from "next/link";
 import { Input } from 'antd';
+import { useSelector, useDispatch } from 'react-redux';
+import { loginAction } from '../../reducers/user';
 
 const LoginForm = () => {
+  const dispatch = useDispatch();
   const [email, onChangeEmail] = useInput("");
   const [password, onChangePassword] = useInput("");
 
   const onSubmitForm = useCallback(() => {
     console.log(email,password);
+    dispatch(loginAction({ email, password }));
     // dispatch(loginRequestAction({ email, password }));
   },[email, password]);
 

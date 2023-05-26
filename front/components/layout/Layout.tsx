@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useCallback } from "react";
 import {
   SmileOutlined,
   RestOutlined,
@@ -6,12 +6,10 @@ import {
 } from '@ant-design/icons';
 import type { MenuProps } from 'antd';
 import { Breadcrumb, Layout, Menu } from 'antd';
-<<<<<<< HEAD
 import * as style from '../../styles/layoutStyle';
-=======
-import * as style from '../../styles/layout';
->>>>>>> 2ba4eb7efdd106695123f78e6b01fa5b100e69f3
 import Link from 'next/link';
+import { useDispatch } from 'react-redux';
+import { logoutAction } from '../../reducers/user'
 
 const { Sider } = Layout;
 
@@ -36,6 +34,7 @@ function getItem(
 }
 
 const AppLayout = ({ children }: PropTypes) => {
+  const dispatch = useDispatch();
   const [collapsed, setCollapsed] = useState(false);
 
   const [current, setCurrent] = useState("한식");
@@ -47,11 +46,7 @@ const AppLayout = ({ children }: PropTypes) => {
   const [me, setMe] = useState(false);
 
   const items: MenuItem[] = [
-<<<<<<< HEAD
     getItem(me ? <Link href="/profile">회원정보</Link> : <Link href="/login">로그인&nbsp;/&nbsp;회원가입</Link>, '1', <UserOutlined />),
-=======
-    getItem(me ? <Link href="/profile">회원정보</Link> : <Link href="/login">로그인</Link>, '1', <UserOutlined />),
->>>>>>> 2ba4eb7efdd106695123f78e6b01fa5b100e69f3
     getItem('한식', '레시피1', <SmileOutlined />, [
       getItem('면', '2'),
       getItem('국', '3'),
@@ -67,6 +62,10 @@ const AppLayout = ({ children }: PropTypes) => {
     getItem(<Link href="/recipe/diet">다이어트</Link>, '10', <SmileOutlined />),
   ];
 
+  const onLogOut = useCallback(()=>{
+    dispatch(logoutAction());
+  },[])
+
   return(
     <style.Container>
       <Sider collapsible collapsed={collapsed} onCollapse={(value) => setCollapsed(value)} theme="light" >
@@ -75,6 +74,7 @@ const AppLayout = ({ children }: PropTypes) => {
       </Sider>
       <Layout>
         <style.Head>
+          <div onClick={onLogOut}>로그아웃</div>
           <style.Title href="/">나만의 레시피</style.Title>
           <div>
             <style.SearchInput />
