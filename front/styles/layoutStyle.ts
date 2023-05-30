@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { Layout, Breadcrumb, Input } from 'antd';
+import { Layout, Input } from 'antd';
 import Link from 'next/link';
 
 const { Content, Sider } = Layout;
@@ -29,7 +29,7 @@ export const Head = styled.div`
     }
   }
 
-  div {
+  .searchInput {
     width: 80vw;
     display: flex;
     justify-content: flex-end;
@@ -48,13 +48,16 @@ export const ContentContainer = styled(Content)`
 
   div{
     padding: 24px;
-    min-height: 100px;
+    /* min-height: 100px; */
     background-color: white;
   }
 `;
 
-export const SubTab = styled(Breadcrumb)`
+export const SubTab = styled.div`
+  align-items: center;
   margin: 16px 0;
+  display: flex;
+  justify-content: space-between;
 `;
 
 export const SideBar = styled(Sider)`
@@ -66,4 +69,25 @@ export const SearchInput = styled(Input.Search)`
   display: flex;
   width: 300px;
   margin-right: 20px;
+`;
+
+export const LogoutBtn = styled.div`
+  display: flex;
+  justify-content: flex-end;
+  width: 80vw;
+  
+  div{
+    cursor: pointer;
+    color: red;
+    font-size: 15px;
+    margin-right: 20px;
+  }
+`;
+
+export const createBtn = styled.button`
+  background-color: #617a55;
+  padding: 5px 15px;
+  color: white;
+  border-radius: 3px;
+  cursor: pointer;
 `;
