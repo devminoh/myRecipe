@@ -20,7 +20,7 @@ const configureStore = () => {
   const middlewares = [sagaMiddleware, loggerMiddleware];
   const enhancer =
     process.env.NODE_ENV === "production"
-      ? compose(applyMiddleware(...middlewares))
+      ? compose(applyMiddleware(...middlewares)) //배포용일땐 데브툴즈 사용안함
       : composeWithDevTools(applyMiddleware(...middlewares));
   const store = createStore(reducer, enhancer);
   store.sagaTask = sagaMiddleware.run(rootSaga);
