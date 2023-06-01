@@ -76,6 +76,19 @@ export const Select = styled.select`
   /* margin-bottom: 10px; */
 `;
 
+//category
+export const Category = styled.div`
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
+  align-items: center;
+  height: 20px;
+  width: 400px;
+  div {
+    width: 200px;
+  }
+`;
+
 //재료
 export const IngredientWrapper = styled.div`
   display: flex;
@@ -91,7 +104,7 @@ export const recipeWrapper = styled.div`
   display: flex;
   flex-direction: row;
   align-items: center;
-  height: 30px;
+  height: 25px;
 `;
 
 export const InputWrapper = styled.div`
@@ -101,12 +114,12 @@ export const InputWrapper = styled.div`
   border: 1px solid #d6d9dc;
   border-radius: 6px;
   padding-right: 10px;
-  margin: 1vh 0;
-  height: 25px;
+  /* margin: 1vh 0; */
+  height: 20px;
 `;
 
 export const AnswerInput = styled.input`
-  padding: 5px 30px 5px 7px;
+  padding: 3px 30px 3px 7px;
   color: #667085;
   width: 100%;
   border: none;
@@ -126,8 +139,8 @@ export const PlusInput = styled.div`
     background-color: #d6d9dc;
     color: #667085;
     border-radius: 50%;
-    width: 25px;
-    height: 25px;
+    width: 15px;
+    height: 15px;
   }
 `;
 
