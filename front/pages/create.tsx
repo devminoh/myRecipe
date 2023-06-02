@@ -1,11 +1,8 @@
-import React, { useCallback, useEffect, useRef, useState } from 'react';
-import { Input, Tag, theme } from 'antd';
+import React, { useState } from 'react';
 import * as style from '../styles/createStyle';
 import {
-  Controller,
   useForm,
   SubmitHandler,
-  useFieldArray,
   UseFormRegister,
   Path,
   useController
@@ -17,6 +14,7 @@ import ButtonModal from '../components/modal/Buttonmodal';
 import { ServeSelect } from '../components/create/select';
 import { Category } from '../components/create/category';
 import { Ingredient } from '../components/create/ingredient';
+import { Recipe } from '../components/create/recipe';
 export interface ingredient {
   name: string;
 }
@@ -39,9 +37,6 @@ export type FormInputProps<TFormValues> = {
 };
 
 const CreateRecipe = () => {
-  const [tags, setTags] = useState<string[]>([]);
-  const [inputValue, setInputValue] = useState('');
-
   const [sumbmitData, setSubmitData] = useState<Inputs>();
   const [openModal, setOpenModal] = useState(false);
   const router = useRouter();
@@ -81,8 +76,8 @@ const CreateRecipe = () => {
             //   });
           };
           
-          const confirmSubmit: SubmitHandler<Inputs> = (data) =>{
-            setSubmitData(data);
+  const confirmSubmit: SubmitHandler<Inputs> = (data) =>{
+    setSubmitData(data);
     console.log(data)
     setOpenModal((prev) => !prev);
   }
@@ -95,17 +90,6 @@ const CreateRecipe = () => {
     name: 'category',
     control: control
   })
-
-  //레시피
-  const { fields, append, remove } = useFieldArray({
-    control,
-    name: `recipes`,
-  });
-
-  const addInput = (e: any) => {
-    e.preventDefault();
-    append({ recipe: '' });
-  };
 
   //취소
   //cancle
@@ -132,40 +116,26 @@ const CreateRecipe = () => {
     {/* 재료추가 */}
     <style.Title>재료</style.Title>
     <Ingredient 
-      register={register} 
-      name={`ingredients.name`}
-      inputValue={inputValue}
-      setInputValue={setInputValue}
-      tags={tags}
-      setTags={setTags}
+      register={register}
+      name={'ingredients'}
+      control={control}
       />
-    {/* <style.Title>레시피</style.Title> */}
-    {/* {fields.map((field, idx) => ( */}
-      {/* <style.recipeWrapper> */}
-        {/* <div>{idx+1}</div> */}
-        {/* <style.InputWrapper key={field.id}>
-          <style.AnswerInput
-            key={field.id}
-            placeholder="레시피를 입력해주세요."
-            {...register(`recipes.${idx}.recipe`, {
-              required: true,
-            })}
-          />
-          {/* <S.DeleteInput onClick={()=>deleteInput}>x</S.DeleteInput> */}
-        {/* </style.InputWrapper> */}
-      {/* </style.recipeWrapper> */}
-    {/* ))} */}
-    {/* <style.PlusInput onClick={addInput}>
-      <div>+</div>
-    </style.PlusInput> */}
-    {/* <style.Title>
+    {/* 레시피 */}
+    <style.Title>레시피</style.Title>
+    <Recipe 
+      register={register}
+      name={'recipes'}
+      control={control}
+    />
+    {/* 링크 */}
+    <style.Title>
       참고 링크
     </style.Title>
     <style.LinkInput 
       id="link"
       {...register(`link`, {
         required: false,
-      })} /> */}
+      })} />
     {/* 버튼 */}
     <style.Btns>
       <style.Cancle onClick={onHandleCancle}>취소하기</style.Cancle>

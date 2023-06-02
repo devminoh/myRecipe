@@ -46,7 +46,7 @@ export const ContentContainer = styled(Content)`
   margin: 0 16px;
   height: 80vh;
 
-  div{
+  .children {
     padding: 24px;
     /* min-height: 100px; */
     background-color: white;
