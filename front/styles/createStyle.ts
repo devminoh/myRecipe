@@ -49,6 +49,7 @@ export const Title = styled.div`
   font-size: 20px;
   font-weight: 800;
   color: #617a55;
+  margin: 10px 0;
 `;
 
 // serve
@@ -57,10 +58,12 @@ export const Serve = styled.div`
   flex-direction: row;
   justify-content: flex-end;
   align-items: center;
-  height: 20px;
+  height: fit-content;
+  margin-bottom: 5px;
   div {
     display: flex;
     align-items: center;
+    margin-left: 5px;
   }
 `;
 export const Select = styled.select`
@@ -82,7 +85,7 @@ export const Category = styled.div`
   flex-direction: row;
   justify-content: flex-end;
   align-items: center;
-  height: 20px;
+  height: fit-content;
   width: 400px;
   div {
     width: 200px;
@@ -92,10 +95,54 @@ export const Category = styled.div`
 //재료
 export const IngredientWrapper = styled.div`
   display: flex;
-  flex-direction: row;
+  flex-wrap: wrap;
+  height: fit-content;
   align-items: center;
   margin: 5px 0;
-  height: 25px;
+  align-content: center;
+  height: fit-content;
+
+  .plus {
+    border: 1px dashed black;
+    padding: 3px 5px;
+    border-radius: 5px;
+    background-color: #d6d9dc;
+    margin: 10px 15px;
+  }
+`;
+
+export const TagWrapper = styled.div`
+  position: relative;
+  width: 150px;
+  height: 30px;
+  /* border: 1px solid blue; */
+
+  input {
+    width: 130px;
+    position: absolute;
+    top: 6px;
+    right: 5px;
+    border: 1px solid #617a55;
+    border-radius: 3px;
+    padding: 3px 7px;
+    background-color: #f7e1ae;
+    &:focus {
+      border: 1px solid red;
+      background-color: #f7e1ae;
+    }
+  }
+  button {
+    position: absolute;
+    top: 8px;
+    right: 15px;
+    align-items: center;
+    justify-content: center;
+    font-weight: 700;
+    color: #617a55;
+    &:hover {
+      color: red;
+    }
+  }
 `;
 
 
@@ -104,7 +151,16 @@ export const recipeWrapper = styled.div`
   display: flex;
   flex-direction: row;
   align-items: center;
-  height: 25px;
+  margin-bottom: 10px;
+
+  .index {
+    padding: 5px 10px;
+    background-color: #f7e1ae;
+    margin-right: 5px;
+    border-radius: 50%;
+    color: #617a55;
+    font-weight: 700;
+  }
 `;
 
 export const InputWrapper = styled.div`
@@ -115,7 +171,7 @@ export const InputWrapper = styled.div`
   border-radius: 6px;
   padding-right: 10px;
   /* margin: 1vh 0; */
-  height: 20px;
+  height: 25px;
 `;
 
 export const AnswerInput = styled.input`
@@ -126,6 +182,7 @@ export const AnswerInput = styled.input`
   border-radius: 6px;
   outline: none;
 `;
+
 export const PlusInput = styled.div`
   display: flex;
   justify-content: center;
@@ -139,10 +196,14 @@ export const PlusInput = styled.div`
     background-color: #d6d9dc;
     color: #667085;
     border-radius: 50%;
-    width: 15px;
-    height: 15px;
+    width: 30px;
+    height: 30px;
   }
 `;
+
+export const DeleteInput = styled.div`
+  cursor: pointer;
+`; 
 
 // 버튼
 export const Btns = styled.div`
@@ -181,7 +242,6 @@ export const Submit = styled.button`
 export const LinkInput = styled.input`
   border: 1px solid #d6d9dc;
   border-radius: 6px;
-  margin-left: 24px;
   padding: 5px 10px;
   width: 50vw;
 `;

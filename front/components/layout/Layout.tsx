@@ -83,7 +83,7 @@ const AppLayout = ({ children }: PropTypes) => {
               <style.createBtn>작성하기</style.createBtn>
             </Link>
           </style.SubTab>
-          <div>
+          <div className="children">
             {children}
           </div>
         </style.ContentContainer>
