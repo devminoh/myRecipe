@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useRef, useState } from 'react';
 import * as style from '../styles/createStyle';
 import {
   useForm,
@@ -15,6 +15,13 @@ import { ServeSelect } from '../components/create/select';
 import { Category } from '../components/create/category';
 import { Ingredient } from '../components/create/ingredient';
 import { Recipe } from '../components/create/recipe';
+
+import { LoadingOutlined, PlusOutlined } from '@ant-design/icons';
+import { Button, message, Upload } from 'antd';
+import type { UploadChangeParam } from 'antd/es/upload';
+import type { RcFile, UploadFile, UploadProps } from 'antd/es/upload/interface';
+import { useSelector, useDispatch } from 'react-redux';
+import { Sumnail } from '../components/create/sumnail';
 export interface ingredient {
   name: string;
 }
@@ -24,6 +31,7 @@ export interface recipes {
 }
 
 export interface Inputs {
+  image: any;
   serve: number;
   category: string;
   ingredients: ingredient[];
@@ -37,6 +45,8 @@ export type FormInputProps<TFormValues> = {
 };
 
 const CreateRecipe = () => {
+  const dispatch = useDispatch();
+  const { imagePath } = useSelector((state:any)=> state.post);
   const [sumbmitData, setSubmitData] = useState<Inputs>();
   const [openModal, setOpenModal] = useState(false);
   const router = useRouter();
@@ -60,6 +70,9 @@ const CreateRecipe = () => {
   console.log(sumbmitData)
   //submit
   const onHandleSubmit: SubmitHandler<Inputs> = (data) => {
+    const formData = new FormData();
+    formData.append('image', data.image[0]);
+    data = { ...data, image: data.image[0].name };
     console.log(data)
     // axios
     //   .post(`${api}/topics`, sumbmitData, {
@@ -79,6 +92,7 @@ const CreateRecipe = () => {
   const confirmSubmit: SubmitHandler<Inputs> = (data) =>{
     setSubmitData(data);
     console.log(data)
+    console.log(data.image)
     setOpenModal((prev) => !prev);
   }
   
@@ -90,6 +104,9 @@ const CreateRecipe = () => {
     name: 'category',
     control: control
   })
+
+  // 이미지
+  const [imageUrl, setImageUrl] = useState('');
 
   //취소
   //cancle
@@ -103,16 +120,21 @@ const CreateRecipe = () => {
 
   return(
   <form onSubmit={handleSubmit(confirmSubmit)}>
-    {/* serve */}
-    <style.Serve>
-      <ServeSelect register={register} options={serveOption} name={'serve'} />
-      <div>인분</div>
-    </style.Serve>
-    {/* 카테고리 */}
-    <style.Category>
-      <div>카테고리 :</div>
-      <Category field={field} />
-    </style.Category>
+    <style.TopContainer>
+      <Sumnail register={register} control={control} imageUrl={imageUrl} setImageUrl={setImageUrl} />
+      <div className='TopRight'>    
+        {/* serve */}
+        <style.Serve>
+          <ServeSelect register={register} options={serveOption} name={'serve'} />
+          <div>인분</div>
+        </style.Serve>
+        {/* 카테고리 */}
+        <style.Category>
+          <div>카테고리 :</div>
+          <Category field={field} />
+        </style.Category>
+      </div>
+    </style.TopContainer>
     {/* 재료추가 */}
     <style.Title>재료</style.Title>
     <Ingredient 
@@ -152,30 +174,6 @@ const CreateRecipe = () => {
         />
       ) : null}
     </> */}
-    {/* <style.SumContainer>
-      {contentFileImage && (
-        <style.ContentImg alt="detailImg" src={contentFileImage} />
-      )}
-      <style.UploadDelete>
-        <style.ImgLabel htmlFor="detailImage">
-          <div className="noImg">{contentsImg === '' ? '+' : ''}</div>
-        </style.ImgLabel>
-        <style.SumnailUpload
-          name="detailImg"
-          id="detailImage"
-          type="file"
-          accept="image/*"
-          onChange={changeContentImg}
-        />
-        {contentsImg === '' ? (
-          ''
-        ) : (
-          <style.DeleteSumnaeil onClick={(e:any) => deletedetailFileImage(e)}>
-            삭제
-          </style.DeleteSumnaeil>
-        )}
-      </style.UploadDelete>
-    </style.SumContainer> */}
   </form>
   )
 }
