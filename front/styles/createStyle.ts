@@ -12,6 +12,8 @@ export const TopContainer = styled.div`
   }
 `;
 
+export const ImageContainer = styled.div``; 
+
 export const SumContainer = styled.div`
   display: flex;
   flex-direction: column;
@@ -63,6 +65,11 @@ export const Serve = styled.div`
     margin-left: 5px;
   }
 `;
+
+export const ServeShow = styled.div`
+  color: #c07f00;
+  font-size: 15px;
+`;
 export const Select = styled.select`
   display: flex;
   align-items: center;
@@ -86,6 +93,10 @@ export const Category = styled.div`
   width: 200px;
   div {
     width: 200px;
+    color: #c07f00;
+    font-size: 20px;
+    display: flex;
+    justify-content: flex-end;
   }
 `;
 
@@ -157,6 +168,11 @@ export const recipeWrapper = styled.div`
     border-radius: 50%;
     color: #617a55;
     font-weight: 700;
+  }
+
+  .content {
+    color: #c07f00;
+    font-size: 20px;
   }
 `;
 
@@ -245,4 +261,15 @@ export const LinkInput = styled.input`
   border-radius: 6px;
   padding: 5px 10px;
   width: 50vw;
+`;
+
+export const LinkShow = styled.div`
+  color: #f99b7d;
+  text-decoration: none;
+  cursor: pointer;
+  font-weight: 800;
+
+  &:hover {
+    color: #b04759;
+  }
 `;

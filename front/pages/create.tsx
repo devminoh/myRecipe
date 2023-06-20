@@ -1,4 +1,4 @@
-import React, { useRef, useState } from 'react';
+import React, { useCallback, useRef, useState } from 'react';
 import * as style from '../styles/createStyle';
 import {
   useForm,
@@ -16,12 +16,9 @@ import { Category } from '../components/create/category';
 import { Ingredient } from '../components/create/ingredient';
 import { Recipe } from '../components/create/recipe';
 
-import { LoadingOutlined, PlusOutlined } from '@ant-design/icons';
-import { Button, message, Upload } from 'antd';
-import type { UploadChangeParam } from 'antd/es/upload';
-import type { RcFile, UploadFile, UploadProps } from 'antd/es/upload/interface';
 import { useSelector, useDispatch } from 'react-redux';
 import { Sumnail } from '../components/create/sumnail';
+import { addPost } from '../reducers/post';
 export interface ingredient {
   name: string;
 }
@@ -67,12 +64,11 @@ const CreateRecipe = () => {
       link: ''
     },
   });
-  console.log(sumbmitData)
   //submit
   const onHandleSubmit: SubmitHandler<Inputs> = (data) => {
-    const formData = new FormData();
-    formData.append('image', data.image[0]);
-    data = { ...data, image: data.image[0].name };
+    // const formData = new FormData();
+    // formData.append('image', data.image[0]);
+    // data = { ...data, image: data.image[0].name };
     console.log(data)
     // axios
     //   .post(`${api}/topics`, sumbmitData, {
@@ -89,12 +85,12 @@ const CreateRecipe = () => {
             //   });
           };
           
-  const confirmSubmit: SubmitHandler<Inputs> = (data) =>{
+  const confirmSubmit: SubmitHandler<Inputs> = useCallback((data) =>{
     setSubmitData(data);
     console.log(data)
-    console.log(data.image)
     setOpenModal((prev) => !prev);
-  }
+    dispatch(addPost);
+  }, [])
   
   //serve
   const serveOption = [1, 2, 3, 4, 5, 6];

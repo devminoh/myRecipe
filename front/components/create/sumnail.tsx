@@ -10,7 +10,6 @@ export const Sumnail = ({ register, imageUrl, setImageUrl, control }:any) => {
   const sumImgInput = useRef<any>();
 
   // const [logoLoading, setLogoLoading] = useState(false);
-console.log(imageUrl)
   const handleImgBtnClick = (e:any) => {
     e.preventDefault();
     sumImgInput.current.click();

@@ -1,11 +1,16 @@
 import React from 'react';
 import { Image } from 'antd';
 import * as style from '../styles/cardStyle';
+import { useRouter } from 'next/router';
 
 const Card = ({post}:any) => {
+  const router = useRouter();
+  const handleCardClick = () => {
+    router.push(`/about`)
+  }
   console.log(post)
   return(
-  <style.CardContainer>
+  <style.CardContainer onClick={handleCardClick}>
     <div><Image
     width={150}
     height={150}
