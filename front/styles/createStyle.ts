@@ -1,47 +1,46 @@
 import styled from 'styled-components';
 
+export const TopContainer = styled.div`
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  margin-bottom: 40px; 
+  
+  .TopRight {
+    display: flex;
+    flex-direction: column;
+  }
+`;
+
+export const ImageContainer = styled.div``; 
+
 export const SumContainer = styled.div`
   display: flex;
   flex-direction: column;
-`;
-export const ContentImg = styled.img`
-  margin: 10px 20px 10px 0;
-  border-radius: 5px;
-  width: 20%;
-  height: 20%;
-`;
-export const UploadDelete = styled.div`
-  display: flex;
-`;
-export const ImgLabel = styled.label`
-  display: inline-block;
-  font-size: inherit;
-  line-height: normal;
-  vertical-align: middle;
-  cursor: pointer;
-  border: 2px solid #e2e6ee;
-  padding: 15px 20px;
-  border-radius: 5px;
-  color: #667085;
-`;
-export const SumnailUpload = styled.input`
-  margin-left: 10px;
-  position: absolute;
-  width: 0;
-  height: 0;
-  padding: 0;
-  margin: -1px;
-  overflow: hidden;
-  clip: rect(0, 0, 0, 0);
-  border: 0;
-`;
-export const DeleteSumnaeil = styled.button`
-  background-color: var(--color-navy);
-  color: white;
-  width: 55px;
-  height: 30px;
-  border-radius: 5px;
-  cursor: pointer;
+  /* input {
+    display: none;
+  } */
+  button {
+    border: 1px dotted #617a55;
+    padding: 50px;
+    border-radius: 5px;
+  }
+
+  .afterImg {
+    display: flex;
+    flex-direction: column;
+    width: 120px;
+    height: 120px;
+  }
+  .deleteImg {
+    margin-top: 5px;
+    background-color: #617a55;
+    color: white;
+    border: none;
+    border-radius: 12px;
+    padding: 5px 7px;
+    cursor: pointer;
+  }
 `;
 
 //title
@@ -66,6 +65,11 @@ export const Serve = styled.div`
     margin-left: 5px;
   }
 `;
+
+export const ServeShow = styled.div`
+  color: #c07f00;
+  font-size: 15px;
+`;
 export const Select = styled.select`
   display: flex;
   align-items: center;
@@ -86,9 +90,13 @@ export const Category = styled.div`
   justify-content: flex-end;
   align-items: center;
   height: fit-content;
-  width: 400px;
+  width: 200px;
   div {
     width: 200px;
+    color: #c07f00;
+    font-size: 20px;
+    display: flex;
+    justify-content: flex-end;
   }
 `;
 
@@ -106,7 +114,7 @@ export const IngredientWrapper = styled.div`
     border: 1px dashed black;
     padding: 3px 5px;
     border-radius: 5px;
-    background-color: #d6d9dc;
+    background-color: #f7e1ae;
     margin: 10px 15px;
   }
 `;
@@ -161,9 +169,38 @@ export const recipeWrapper = styled.div`
     color: #617a55;
     font-weight: 700;
   }
+
+  .content {
+    color: #c07f00;
+    font-size: 20px;
+  }
+`;
+
+export const recipeAboutWrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+  div {
+    display: flex;
+    margin-bottom: 10px;
+
+    .index {
+      padding: 8px 10px;
+      background-color: #f7e1ae;
+      margin-right: 5px;
+      border-radius: 50%;
+      color: #617a55;
+      font-weight: 700;
+    }
+
+    .content {
+      color: #c07f00;
+      font-size: 20px;
+    }
+  }
 `;
 
 export const InputWrapper = styled.div`
+
   display: flex;
   align-items: center;
   width: 100%;
@@ -193,11 +230,15 @@ export const PlusInput = styled.div`
     align-items: center;
     cursor: pointer;
     font-weight: 800;
-    background-color: #d6d9dc;
+    background-color: #f7e1ae;
     color: #667085;
     border-radius: 50%;
     width: 30px;
     height: 30px;
+    &:hover {
+      background-color: #617a55;
+      color: #f7e1ae;
+    }
   }
 `;
 
@@ -244,4 +285,15 @@ export const LinkInput = styled.input`
   border-radius: 6px;
   padding: 5px 10px;
   width: 50vw;
+`;
+
+export const LinkShow = styled.div`
+  color: #f99b7d;
+  text-decoration: none;
+  cursor: pointer;
+  font-weight: 800;
+
+  &:hover {
+    color: #b04759;
+  }
 `;
