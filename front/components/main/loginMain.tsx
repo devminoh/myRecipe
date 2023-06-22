@@ -1,9 +1,13 @@
 import React from 'react';
 import { Row, Col } from 'antd';
 import Card from '../card';
+import { PostType } from '../../shared/type';
+import { useSelector } from 'react-redux';
 
 {/* xs:mobile, sm: tablet, md: 작은 데스크탑 */}
-const LoginMain = ({ mainPosts }:any) => {
+const LoginMain = () => {
+  const { mainPosts } = useSelector((state:any)=> state.post)
+  
   return(
     <div>
       {/* <Row gutter={8}>
@@ -11,7 +15,7 @@ const LoginMain = ({ mainPosts }:any) => {
         <Col xs={24} md={12}>메인페이지2</Col> 
       </Row>
       <div>메인페이지3</div> */}
-      {mainPosts.map((post)=> <Card key={post.id} post={post} />)}
+      {mainPosts.map((post: PostType)=> <Card key={post.id} post={post} />)}
     </div>
       )
 }

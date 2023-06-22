@@ -176,7 +176,31 @@ export const recipeWrapper = styled.div`
   }
 `;
 
+export const recipeAboutWrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+  div {
+    display: flex;
+    margin-bottom: 10px;
+
+    .index {
+      padding: 8px 10px;
+      background-color: #f7e1ae;
+      margin-right: 5px;
+      border-radius: 50%;
+      color: #617a55;
+      font-weight: 700;
+    }
+
+    .content {
+      color: #c07f00;
+      font-size: 20px;
+    }
+  }
+`;
+
 export const InputWrapper = styled.div`
+
   display: flex;
   align-items: center;
   width: 100%;
