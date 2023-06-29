@@ -4,18 +4,12 @@ import {
   LOG_IN_SUCCESS,
   LOG_OUT_SUCCESS,
   SIGN_UP_SUCCESS,
-  FOLLOW_SUCCESS,
-  UNFOLLOW_SUCCESS,
   LOG_IN_FAILURE,
   LOG_OUT_FAILURE,
   SIGN_UP_FAILURE,
-  FOLLOW_FAILURE,
-  UNFOLLOW_FAILURE,
   LOG_IN_REQUEST,
   LOG_OUT_REQUEST,
   SIGN_UP_REQUEST,
-  FOLLOW_REQUEST,
-  UNFOLLOW_REQUEST,
 } from '../reducers/user';
 
 export interface actionType {
@@ -66,26 +60,26 @@ function* logOut() {
   }
 }
 
-// // signUp
-// function signUpAPI(data:any) {
-//   return axios.post('/api/signUp', data);
-// }
+// signUp
+function signUpAPI(data:any) {
+  return axios.post('/api/signUp', data);
+}
 
-// function* signUp() {
-//   try {
-//     // const result = yield call(signUpAPI);
-//     yield delay(1000);
-//     yield put({
-//       type: SIGN_UP_SUCCESS,
-//       // data: result.data,
-//     });
-//   } catch (err:any) {
-//     yield put({
-//       type: SIGN_UP_FAILURE,
-//       error: err.response.data,
-//     });
-//   }
-// }
+function* signUp() {
+  try {
+    // const result = yield call(signUpAPI);
+    yield delay(1000);
+    yield put({
+      type: SIGN_UP_SUCCESS,
+      // data: result.data,
+    });
+  } catch (err:any) {
+    yield put({
+      type: SIGN_UP_FAILURE,
+      error: err.response.data,
+    });
+  }
+}
 
 // // follow
 // // function followAPI(data:any) {

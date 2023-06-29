@@ -1,24 +1,21 @@
 // import { produce } from "immer";
 
 export const initialState = {
-  isLoggingIn: false,
-  isLoggedIn: false,
-  isLoggingOut: false,
 //   followLoading: false, // 팔로우 시도중
 //   followDone: false,
 //   followError: null,
 //   unfollowLoading: false, // 언팔로우 시도중
 //   unfollowDone: false,
 //   unfollowError: null,
-//   logInLoading: false, // 로그인 시도중
-//   logInDone: false,
-//   logInError: null,
-//   logOutLoading: false, // 로그아웃 시도중
-//   logOutDone: false,
-//   logOutError: null,
-//   signUpLoading: false, // 회원가입 시도중
-//   signUpDone: false,
-//   signUpError: null,
+  logInLoading: false, // 로그인 시도중
+  logInDone: false,
+  logInError: null,
+  logOutLoading: false, // 로그아웃 시도중
+  logOutDone: false,
+  logOutError: null,
+  signUpLoading: false, // 회원가입 시도중
+  signUpDone: false,
+  signUpError: null,
 //   changeNicknameLoading: false, // 닉변 시도중
 //   changeNicknameDone: false,
 //   changeNicknameError: null,
@@ -54,23 +51,24 @@ export const SIGN_UP_FAILURE = "SIGN_UP_FAILURE";
 // export const ADD_POST_TO_ME = "ADD_POST_TO_ME";
 // export const REMOVE_POST_OF_ME = "REMOVE_POST_OF_ME";
 
-// const dummyUser = (data: any) => ({
-//   ...data,
-//   nickname: "zerocho",
-//   id: 1,
-//   Posts: [{ id: 1 }],
-//   Followings: [
-//     { nickname: "라라라라" },
-//     { nickname: "해와달" },
-//     { nickname: "루루루" },
-//   ],
-//   Followers: [
-//     { nickname: "라라라라" },
-//     { nickname: "해와달" },
-//     { nickname: "루루루" },
-//   ],
-// });
+const dummyUser = (data: any) => ({
+  ...data,
+  nickname: "zerocho",
+  id: 1,
+  Posts: [{ id: 1 }],
+  Followings: [
+    { nickname: "라라라라" },
+    { nickname: "해와달" },
+    { nickname: "루루루" },
+  ],
+  Followers: [
+    { nickname: "라라라라" },
+    { nickname: "해와달" },
+    { nickname: "루루루" },
+  ],
+});
 
+//action creator
 export const loginRequestAction = (data: any) => {
   return {
     type: LOG_IN_REQUEST,
@@ -191,57 +189,66 @@ export const logoutRequestAction = () => {
 // };
 // export default reducer;
 
-
-//action creator
-// export const loginRequestAction = (data:any) => {
-//   return {
-//     type: 'LOG_IN',
-//     data: data,
-//   }
-// }
-
-// export const logoutRequestAction = () => {
-//   return {
-//     type: 'LOG_OUT',
-//   }
-// }
-
-const reducer = (state=initialState, action:any) => {
+const reducer = (state=initialState, action: { type: any; data: any; error: any; }) => {
   switch(action.type){
-    case 'LOG_IN_REQUEST':
+    case LOG_IN_REQUEST:
       return {
         ...state, 
-        isLoggedIn: true,
+        logInLoading: true,
+        logInError: null,
+        logInDone: false,
       };
-    case 'LOG_IN_SUCCESS':
+    case LOG_IN_SUCCESS:
       return {
         ...state, 
-        isLoggingIn: false,
-        isLoggedIn: true,
-        me: {...action.data, nickname: 'zerocho'},
+        logInLoading: false,
+        logInDone: true,
+        me: dummyUser(action.data),
       };
-    case 'LOG_IN_FAILURE':
+    case LOG_IN_FAILURE:
       return {
         ...state, 
-        isLoggingIn: false,
-        isLoggedIn: false,
+        logInLoading: false,
+        logInError: action.error,
       };
-    case 'LOG_OUT_REQUEST':
+    case LOG_OUT_REQUEST:
       return {
         ...state, 
-        isLoggingOut: true,
+        logOutLoading: true,
+        logOutDone: false,
+        logOutError: null,
       }
-    case 'LOG_OUT_SUCCESS':
+    case LOG_OUT_SUCCESS:
       return {
         ...state, 
-        isLoggingOut: false,
-        isLoggedIn: false,
+        logOutLoading: false,
+        logOutDone: true,
         me: null,
       }
-    case 'LOG_OUT_FAILURE':
+    case LOG_OUT_FAILURE:
       return {
         ...state, 
-        isLoggingOut: false,
+        logOutLoading: false,
+        logOutError: action.error,
+      }
+    case SIGN_UP_REQUEST:
+      return {
+        ...state, 
+        signUpLoading: true,
+        signUpDone: false,
+        signUpError: null,
+      }
+    case SIGN_UP_SUCCESS:
+      return {
+        ...state, 
+        signUpLoading: false,
+        signUpDone: true,
+      }
+    case SIGN_UP_FAILURE:
+      return {
+        ...state, 
+        signUpLoading: false,
+        signUpError: action.error,
       }
     default:
       return state;
