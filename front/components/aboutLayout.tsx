@@ -13,16 +13,16 @@ export interface AboutPropTypes {
 const AboutLayout = ({ pid }: AboutPropTypes) => {
 
   const posts = useSelector((state:any)=> state.post.mainPosts);
-  const post = posts.filter((post:any) => post.id == pid);
+  const post = posts.filter((post:any) => post.id == pid)[0];
   console.log(post)
 
   return(
     <div>
     <style.ImageContainer>
-      {post[0].image ? (<Image
+      {post.image ? (<Image
           width={200}
           height={200}
-          src={`${post[0].image}`} />) : (
+          src={`${post.image}`} />) : (
       <Image
           width={200}
           height={200}
@@ -32,11 +32,11 @@ const AboutLayout = ({ pid }: AboutPropTypes) => {
     </style.ImageContainer>
     <style.ServeShow>
       <style.Title>serve</style.Title>
-      <div> {post[0].serve} 인분</div>
+      <div> {post.serve} 인분</div>
     </style.ServeShow>
     <style.Title>재료</style.Title>
     <Space size={[0, 'small']} wrap>
-      {post[0].Ingredients.map((ing:any, idx:number)=> 
+      {post.Ingredients.map((ing:any, idx:number)=> 
         (<Tag key={idx} bordered={false} color="gold">
         {ing.name}
       </Tag>)
@@ -44,7 +44,7 @@ const AboutLayout = ({ pid }: AboutPropTypes) => {
     </Space>
     <style.Title>레시피</style.Title>
     <style.recipeAboutWrapper>
-      {post[0].Recipes.map((ing:any, idx:number)=> 
+      {post.Recipes.map((ing:any, idx:number)=> 
         (<div key={idx}><div className='index'>{idx +1}</div>
           <div className='content'>{ing.recipe}</div></div>)
       )}
@@ -52,7 +52,7 @@ const AboutLayout = ({ pid }: AboutPropTypes) => {
     <style.Title>
       참고 링크
     </style.Title>
-    <Link href={`${post[0].link}`} >
+    <Link href={`${post.link}`} >
       <a target="_blank" rel="noopener noreferrer">
         <style.LinkShow>
           링크 보러가기

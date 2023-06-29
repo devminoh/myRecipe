@@ -17,7 +17,7 @@ export function Recipe({ register, name, control }: Prop){
   return(
     <div>
       {fields.map((field, idx) => (
-      <style.recipeWrapper>
+      <style.recipeWrapper key={idx}>
         <div className="index">{idx+1}</div>
         <style.InputWrapper key={field.id}>
           <style.AnswerInput

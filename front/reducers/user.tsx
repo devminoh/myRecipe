@@ -1,6 +1,9 @@
 // import { produce } from "immer";
 
-// export const initialState = {
+export const initialState = {
+  isLoggingIn: false,
+  isLoggedIn: false,
+  isLoggingOut: false,
 //   followLoading: false, // 팔로우 시도중
 //   followDone: false,
 //   followError: null,
@@ -19,22 +22,22 @@
 //   changeNicknameLoading: false, // 닉변 시도중
 //   changeNicknameDone: false,
 //   changeNicknameError: null,
-//   me: null,
-//   signUpData: {},
-//   loginData: {},
-// };
+  me: null,
+  signUpData: {},
+  loginData: {},
+};
 
-// export const LOG_IN_REQUEST = "LOG_IN_REQUEST";
-// export const LOG_IN_SUCCESS = "LOG_IN_SUCCESS";
-// export const LOG_IN_FAILURE = "LOG_IN_FAILURE";
+export const LOG_IN_REQUEST = "LOG_IN_REQUEST";
+export const LOG_IN_SUCCESS = "LOG_IN_SUCCESS";
+export const LOG_IN_FAILURE = "LOG_IN_FAILURE";
 
-// export const LOG_OUT_REQUEST = "LOG_OUT_REQUEST";
-// export const LOG_OUT_SUCCESS = "LOG_OUT_SUCCESS";
-// export const LOG_OUT_FAILURE = "LOG_OUT_FAILURE";
+export const LOG_OUT_REQUEST = "LOG_OUT_REQUEST";
+export const LOG_OUT_SUCCESS = "LOG_OUT_SUCCESS";
+export const LOG_OUT_FAILURE = "LOG_OUT_FAILURE";
 
-// export const SIGN_UP_REQUEST = "SIGN_UP_REQUEST";
-// export const SIGN_UP_SUCCESS = "SIGN_UP_SUCCESS";
-// export const SIGN_UP_FAILURE = "SIGN_UP_FAILURE";
+export const SIGN_UP_REQUEST = "SIGN_UP_REQUEST";
+export const SIGN_UP_SUCCESS = "SIGN_UP_SUCCESS";
+export const SIGN_UP_FAILURE = "SIGN_UP_FAILURE";
 
 // export const CHANGE_NICKNAME_REQUEST = "CHANGE_NICKNAME_REQUEST";
 // export const CHANGE_NICKNAME_SUCCESS = "CHANGE_NICKNAME_SUCCESS";
@@ -68,18 +71,18 @@
 //   ],
 // });
 
-// export const loginRequestAction = (data: any) => {
-//   return {
-//     type: LOG_IN_REQUEST,
-//     data,
-//   };
-// };
+export const loginRequestAction = (data: any) => {
+  return {
+    type: LOG_IN_REQUEST,
+    data,
+  };
+};
 
-// export const logoutRequestAction = () => {
-//   return {
-//     type: LOG_OUT_REQUEST,
-//   };
-// };
+export const logoutRequestAction = () => {
+  return {
+    type: LOG_OUT_REQUEST,
+  };
+};
 
 // const reducer = (state = initialState, action: { type: any; data: any; error: null; }) => {
 //   return produce(state, (draft) => {
@@ -188,42 +191,57 @@
 // };
 // export default reducer;
 
-export const initialState = {
-  isLoggedIn: false,
-  me: null,
-  signUpData: {},
-  loginData: {},
-}
-
 
 //action creator
-export const loginAction = (data:any) => {
-  return {
-    type: 'LOG_IN',
-    data: data,
-  }
-}
+// export const loginRequestAction = (data:any) => {
+//   return {
+//     type: 'LOG_IN',
+//     data: data,
+//   }
+// }
 
-export const logoutAction = (data:any) => {
-  return {
-    type: 'LOG_OUT',
-    data: data,
-  }
-}
+// export const logoutRequestAction = () => {
+//   return {
+//     type: 'LOG_OUT',
+//   }
+// }
 
 const reducer = (state=initialState, action:any) => {
   switch(action.type){
-    case 'LOG_IN':
+    case 'LOG_IN_REQUEST':
       return {
         ...state, 
         isLoggedIn: true,
-        me: action.data,
       };
-    case 'LOG_OUT':
+    case 'LOG_IN_SUCCESS':
       return {
         ...state, 
+        isLoggingIn: false,
+        isLoggedIn: true,
+        me: {...action.data, nickname: 'zerocho'},
+      };
+    case 'LOG_IN_FAILURE':
+      return {
+        ...state, 
+        isLoggingIn: false,
+        isLoggedIn: false,
+      };
+    case 'LOG_OUT_REQUEST':
+      return {
+        ...state, 
+        isLoggingOut: true,
+      }
+    case 'LOG_OUT_SUCCESS':
+      return {
+        ...state, 
+        isLoggingOut: false,
         isLoggedIn: false,
         me: null,
+      }
+    case 'LOG_OUT_FAILURE':
+      return {
+        ...state, 
+        isLoggingOut: false,
       }
     default:
       return state;

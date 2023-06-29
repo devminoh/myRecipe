@@ -90,6 +90,7 @@ const CreateRecipe = () => {
     console.log(data)
     setOpenModal((prev) => !prev);
     dispatch(addPost);
+    router.push(`/`);
   }, [])
   
   //serve
