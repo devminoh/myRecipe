@@ -9,7 +9,7 @@ import { Breadcrumb, Layout, Menu } from 'antd';
 import * as style from '../../styles/layoutStyle';
 import Link from 'next/link';
 import { useDispatch, useSelector } from 'react-redux';
-import { logoutAction } from '../../reducers/user';
+import { logoutRequestAction } from '../../reducers/user';
 
 const { Sider } = Layout;
 
@@ -36,6 +36,8 @@ function getItem(
 const AppLayout = ({ children }: PropTypes) => {
   const dispatch = useDispatch();
   const { isLoggedIn } = useSelector((state:any)=> state.user);
+  const { me, isLogginOut } = useSelector((state:any)=> state.user);
+  console.log(me)
   const [collapsed, setCollapsed] = useState(false);
 
   const [current, setCurrent] = useState("한식");
@@ -54,7 +56,7 @@ const AppLayout = ({ children }: PropTypes) => {
   ];
 
   const onLogOut = useCallback(()=>{
-    dispatch(logoutAction());
+    dispatch(logoutRequestAction());
   },[])
 
   return(
@@ -65,6 +67,7 @@ const AppLayout = ({ children }: PropTypes) => {
       </Sider>
       <Layout>
         <style.Head>
+          {/* <div>{me.nickname}님</div> */}
           <style.LogoutBtn>
             {isLoggedIn && <div onClick={onLogOut}>로그아웃</div>}
           </style.LogoutBtn>
