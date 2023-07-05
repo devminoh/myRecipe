@@ -1,16 +1,17 @@
-import React, { useState } from "react";
+import React, { useState, useCallback } from "react";
 import {
   SmileOutlined,
   RestOutlined,
   UserOutlined,
 } from '@ant-design/icons';
 import type { MenuProps } from 'antd';
-import { Breadcrumb, Layout, Menu, theme } from 'antd';
-import * as style from '../../styles/layout';
+import { Breadcrumb, Layout, Menu } from 'antd';
+import * as style from '../../styles/layoutStyle';
 import Link from 'next/link';
+import { useDispatch, useSelector } from 'react-redux';
+import { logoutRequestAction } from '../../reducers/user';
 
-
-const { Header, Content, Sider } = Layout;
+const { Sider } = Layout;
 
 interface PropTypes {
   children: any;
@@ -32,24 +33,11 @@ function getItem(
   } as MenuItem;
 }
 
-const items: MenuItem[] = [
-  getItem(<Link href="/login">로그인</Link>, '1', <UserOutlined />),
-  getItem('한식', '레시피1', <SmileOutlined />, [
-    getItem('면', '2'),
-    getItem('국', '3'),
-    getItem('밥', '4'),
-  ]),
-  getItem(<Link href="/recipe/china">중식</Link>, '5', <SmileOutlined />),
-  getItem(<Link href="/recipe/western">양식</Link>, '6', <SmileOutlined />),
-  getItem('디저트', '레시피2', <RestOutlined />, [
-    getItem('구움과자', '7'),
-    getItem('빵', '8'),
-    getItem('케이크', '9'),
-  ]),
-  getItem(<Link href="/recipe/diet">다이어트</Link>, '10', <SmileOutlined />),
-];
-
 const AppLayout = ({ children }: PropTypes) => {
+  const dispatch = useDispatch();
+  const { isLoggedIn } = useSelector((state:any)=> state.user);
+  const { me, isLogginOut } = useSelector((state:any)=> state.user);
+  console.log(me)
   const [collapsed, setCollapsed] = useState(false);
 
   const [current, setCurrent] = useState("한식");
@@ -58,27 +46,52 @@ const AppLayout = ({ children }: PropTypes) => {
     setCurrent(e.key);
   }
 
+  const items: MenuItem[] = [
+    getItem(isLoggedIn ? <Link href="/profile">회원정보</Link> : <Link href="/login">로그인&nbsp;/&nbsp;회원가입</Link>, '1', <UserOutlined />),
+    getItem(<Link href="/recipe/korea">한식</Link>, '2', <SmileOutlined />),
+    getItem(<Link href="/recipe/china">중식</Link>, '3', <SmileOutlined />),
+    getItem(<Link href="/recipe/western">양식</Link>, '4', <SmileOutlined />),
+    getItem(<Link href="/recipe/dessert">디저트</Link>, '5', <RestOutlined />),
+    getItem(<Link href="/recipe/diet">다이어트</Link>, '6', <SmileOutlined />),
+  ];
+
+  const onLogOut = useCallback(()=>{
+    dispatch(logoutRequestAction());
+  },[])
+
   return(
-    <Layout style={{ minHeight: 100 }}>
+    <style.Container>
       <Sider collapsible collapsed={collapsed} onCollapse={(value) => setCollapsed(value)} theme="light" >
         <div className="demo-logo-vertical" />
         <Menu theme="light"  defaultSelectedKeys={['2']} mode="inline" items={items} onClick={onMenu} />
       </Sider>
       <Layout>
         <style.Head>
+          {/* <div>{me.nickname}님</div> */}
+          <style.LogoutBtn>
+            {isLoggedIn && <div onClick={onLogOut}>로그아웃</div>}
+          </style.LogoutBtn>
           <style.Title href="/">나만의 레시피</style.Title>
+          <div className="searchInput">
+            <style.SearchInput />
+          </div>
         </style.Head>
         <style.ContentContainer>
           <style.SubTab>
-            <Breadcrumb.Item>User</Breadcrumb.Item>
-            <Breadcrumb.Item>Bill</Breadcrumb.Item>
+            <Breadcrumb>
+              <Breadcrumb.Item>Recipe</Breadcrumb.Item>
+              <Breadcrumb.Item>Bill</Breadcrumb.Item>
+            </Breadcrumb>
+            <Link href="/create">
+              <style.createBtn>작성하기</style.createBtn>
+            </Link>
           </style.SubTab>
-          <div>
+          <div className="children">
             {children}
           </div>
         </style.ContentContainer>
       </Layout>
-    </Layout>
+    </style.Container>
   )
 }
 
