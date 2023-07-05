@@ -89,7 +89,7 @@ const CreateRecipe = () => {
     setSubmitData(data);
     console.log(data)
     setOpenModal((prev) => !prev);
-    dispatch(addPost);
+    dispatch(addPost(data));
     router.push(`/`);
   }, [])
   
