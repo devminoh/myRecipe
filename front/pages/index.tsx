@@ -6,13 +6,13 @@ import LogoutMain from '../components/main/logoutMain';
 import { useSelector } from 'react-redux';
 
 const Home: NextPage = () => {
-  const { isLoggedIn } = useSelector((state:any)=> state.user);
+  const { logInDone } = useSelector((state:any)=> state.user);
   const { mainPosts } = useSelector((state:any)=> state.post);
   const id = useSelector((state:any)=> state.post.mainPosts);
-  console.log(id)
+  
   return(
   <div>
-     {isLoggedIn ? <LoginMain /> : <LogoutMain />}
+     {logInDone ? <LoginMain /> : <LogoutMain />}
   </div>
   )
 }

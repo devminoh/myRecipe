@@ -35,9 +35,8 @@ function getItem(
 
 const AppLayout = ({ children }: PropTypes) => {
   const dispatch = useDispatch();
-  const { isLoggedIn } = useSelector((state:any)=> state.user);
-  const { me, isLogginOut } = useSelector((state:any)=> state.user);
-  console.log(me)
+  const { me, logOutLoading } = useSelector((state:any)=> state.user);
+  
   const [collapsed, setCollapsed] = useState(false);
 
   const [current, setCurrent] = useState("한식");
@@ -47,7 +46,7 @@ const AppLayout = ({ children }: PropTypes) => {
   }
 
   const items: MenuItem[] = [
-    getItem(isLoggedIn ? <Link href="/profile">회원정보</Link> : <Link href="/login">로그인&nbsp;/&nbsp;회원가입</Link>, '1', <UserOutlined />),
+    getItem(me ? <Link href="/profile">회원정보</Link> : <Link href="/login">로그인&nbsp;/&nbsp;회원가입</Link>, '1', <UserOutlined />),
     getItem(<Link href="/recipe/korea">한식</Link>, '2', <SmileOutlined />),
     getItem(<Link href="/recipe/china">중식</Link>, '3', <SmileOutlined />),
     getItem(<Link href="/recipe/western">양식</Link>, '4', <SmileOutlined />),
@@ -69,7 +68,7 @@ const AppLayout = ({ children }: PropTypes) => {
         <style.Head>
           {/* <div>{me.nickname}님</div> */}
           <style.LogoutBtn>
-            {isLoggedIn && <div onClick={onLogOut}>로그아웃</div>}
+            {me && <div onClick={onLogOut}>로그아웃</div>}
           </style.LogoutBtn>
           <style.Title href="/">나만의 레시피</style.Title>
           <div className="searchInput">

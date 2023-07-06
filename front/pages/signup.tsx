@@ -1,11 +1,11 @@
 import React,{ useState, useCallback } from 'react';
 import * as style from '../styles/user/signUpStyle'
 import Head from "next/head";
-import { Checkbox, Form, Input, Button } from 'antd';
+import { Checkbox, Form, Input } from 'antd';
 import styled from 'styled-components';
 
 import useInput from '../shared/useInput';
-// import { SIGN_UP_REQUEST } from '../reducers/user';
+import { SIGN_UP_REQUEST } from '../reducers/user';
 import { useDispatch, useSelector } from 'react-redux';
 
 const ErrorMessage = styled.div`
@@ -14,7 +14,7 @@ const ErrorMessage = styled.div`
 
 const Signup = () => {
   const dispatch = useDispatch();
-  // const { signUpLoading } = useSelector((state)=> state.user);
+  const { signUpLoading } = useSelector((state:any)=> state.user);
 
   const [email, onChangeEmail] = useInput("");
   const [nickname, onChangeNickname] = useInput("");
@@ -46,10 +46,10 @@ const Signup = () => {
       return setTermError(true);
     }
     console.log(email, nickname, password);
-    // dispatch({
-    //   type: SIGN_UP_REQUEST,
-    //   data: { email, password, nickname }
-    // })
+    dispatch({
+      type: SIGN_UP_REQUEST,
+      data: { email, password, nickname }
+    })
   }, [email, password, passwordCheck, term]);
 
   return (
@@ -63,6 +63,7 @@ const Signup = () => {
           <br />
           <Input
             name="user-email"
+            type="email"
             value={email}
             required
             onChange={onChangeEmail}
@@ -73,7 +74,6 @@ const Signup = () => {
           <br />
           <Input
             name="user-nick"
-            type="email"
             value={nickname}
             required
             onChange={onChangeNickname}
@@ -111,7 +111,7 @@ const Signup = () => {
           {termError && <ErrorMessage>약관에 동의하셔야 합니다.</ErrorMessage>}
         </div>
         <div style={{ marginTop: 10 }}>
-          <style.SignUpBtn type="primary" htmlType="submit">
+          <style.SignUpBtn type="primary" htmlType="submit" loading={signUpLoading}>
             가입하기
           </style.SignUpBtn>
         </div>
