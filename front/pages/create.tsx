@@ -1,4 +1,4 @@
-import React, { useCallback, useRef, useState } from 'react';
+import React, { useCallback, useEffect, useRef, useState } from 'react';
 import * as style from '../styles/createStyle';
 import {
   useForm,
@@ -43,7 +43,7 @@ export type FormInputProps<TFormValues> = {
 
 const CreateRecipe = () => {
   const dispatch = useDispatch();
-  const { imagePath } = useSelector((state:any)=> state.post);
+  const { imagePath, addPostDone } = useSelector((state:any)=> state.post);
   const [sumbmitData, setSubmitData] = useState<Inputs>();
   const [openModal, setOpenModal] = useState(false);
   const router = useRouter();
@@ -84,6 +84,12 @@ const CreateRecipe = () => {
             //     console.log('요청 실패!', err.message);
             //   });
           };
+
+//   useEffect(()=> {
+//     if(addPostDone) {
+//       setSubmitData('');
+//     }
+// }, [addPostDone]);
           
   const confirmSubmit: SubmitHandler<Inputs> = useCallback((data) =>{
     setSubmitData(data);
@@ -91,7 +97,7 @@ const CreateRecipe = () => {
     setOpenModal((prev) => !prev);
     dispatch(addPost(data));
     router.push(`/`);
-  }, [])
+  }, []);
   
   //serve
   const serveOption = [1, 2, 3, 4, 5, 6];

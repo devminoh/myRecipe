@@ -11,24 +11,24 @@ export const FormWrapper = styled(Form)`
 `;
 
 export const LoginBtn = styled(Button)`
-  background-color: #617a55;
+  background-color: #8294c4;
   color: white;
   border: none;
   margin-right: 5px;
 
   &:hover {
-    background-color: #F7E1AE;
+    background-color: #f7e1ae;
     color: white;
     border: none;
   }
 `;
 
 export const SignUpBtn = styled(Button)`
-  color: #617a55;
-  border: 1px solid #617a55;
+  color: #8294c4;
+  border: 1px solid #8294c4;
 
   &:hover {
-    border: 1px solid #617a55;
+    border: 1px solid #8294c4;
   }
 `;
 

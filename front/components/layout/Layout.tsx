@@ -79,7 +79,7 @@ const AppLayout = ({ children }: PropTypes) => {
           <style.SubTab>
             <Breadcrumb>
               <Breadcrumb.Item>Recipe</Breadcrumb.Item>
-              <Breadcrumb.Item>Bill</Breadcrumb.Item>
+              <Breadcrumb.Item>About</Breadcrumb.Item>
             </Breadcrumb>
             <Link href="/create">
               <style.createBtn>작성하기</style.createBtn>
