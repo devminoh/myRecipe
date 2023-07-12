@@ -93,7 +93,6 @@ const CreateRecipe = () => {
           
   const confirmSubmit: SubmitHandler<Inputs> = useCallback((data) =>{
     setSubmitData(data);
-    console.log(data)
     setOpenModal((prev) => !prev);
     dispatch(addPost(data));
     router.push(`/`);
@@ -102,6 +101,7 @@ const CreateRecipe = () => {
   //serve
   const serveOption = [1, 2, 3, 4, 5, 6];
   
+
   // 카테고리
   const { field } = useController({
     name: 'category',

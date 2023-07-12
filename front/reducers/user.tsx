@@ -10,9 +10,9 @@ export const initialState = {
   signUpLoading: false, // 회원가입 시도중
   signUpDone: false,
   signUpError: null,
-//   changeNicknameLoading: false, // 닉변 시도중
-//   changeNicknameDone: false,
-//   changeNicknameError: null,
+  changeNicknameLoading: false, // 닉변 시도중
+  changeNicknameDone: false,
+  changeNicknameError: null,
   me: null,
   signUpData: {},
   loginData: {},
@@ -30,9 +30,9 @@ export const SIGN_UP_REQUEST = "SIGN_UP_REQUEST";
 export const SIGN_UP_SUCCESS = "SIGN_UP_SUCCESS";
 export const SIGN_UP_FAILURE = "SIGN_UP_FAILURE";
 
-// export const CHANGE_NICKNAME_REQUEST = "CHANGE_NICKNAME_REQUEST";
-// export const CHANGE_NICKNAME_SUCCESS = "CHANGE_NICKNAME_SUCCESS";
-// export const CHANGE_NICKNAME_FAILURE = "CHANGE_NICKNAME_FAILURE";
+export const CHANGE_NICKNAME_REQUEST = "CHANGE_NICKNAME_REQUEST";
+export const CHANGE_NICKNAME_SUCCESS = "CHANGE_NICKNAME_SUCCESS";
+export const CHANGE_NICKNAME_FAILURE = "CHANGE_NICKNAME_FAILURE";
 
 // export const ADD_POST_TO_ME = "ADD_POST_TO_ME";
 // export const REMOVE_POST_OF_ME = "REMOVE_POST_OF_ME";
@@ -235,6 +235,25 @@ const reducer = (state=initialState, action: { type: any; data: any; error: any;
         ...state, 
         signUpLoading: false,
         signUpError: action.error,
+      }
+    case CHANGE_NICKNAME_REQUEST:
+      return {
+        ...state, 
+        changeNicknameLoading: true,
+        changeNicknameDone: false,
+        changeNicknameError: null,
+      }
+    case CHANGE_NICKNAME_SUCCESS:
+      return {
+        ...state, 
+        changeNicknameLoading: false,
+        changeNicknameDone: true,
+      }
+    case CHANGE_NICKNAME_FAILURE:
+      return {
+        ...state, 
+        changeNicknameLoading: false,
+        changeNicknameError: action.error,
       }
     default:
       return state;

@@ -1,3 +1,4 @@
+import shortId from 'shortid';
 
 export const initialState = {
   mainPosts: [{
@@ -33,43 +34,24 @@ export const ADD_POST_REQUEST = "ADD_POST_REQUEST";
 export const ADD_POST_SUCCESS = "ADD_POST_SUCCESS";
 export const ADD_POST_FAILURE = "ADD_POST_FAILURE";
 
-export const ADD_COMMENT_REQUEST = "ADD_COMMENT_REQUEST";
-export const ADD_COMMENT_SUCCESS = "ADD_COMMENT_SUCCESS";
-export const ADD_COMMENT_FAILURE = "ADD_COMMENT_FAILURE";
-
 export const addPost = (data: any)=>({
   type: ADD_POST_REQUEST,
   data
 })
 
-export const addComment = (data: any)=>({
-  type: ADD_COMMENT_REQUEST,
-  data
-})
-
-export const dummyPost = {
-  id: 2,
+export const dummyPost = (data:any)=>({
+  id: shortId.generate(),
   User: {
     id: 2,
     nickname: '부기초',
   },
-  serve: 2,
-  category: '밥',
-  Ingredients: [{
-    name: '차돌박이 400g'
-  },{
-    name: '연근 100g',
-  }],
-  image: 'https://recipe1.ezmember.co.kr/cache/recipe/2017/10/24/764997128d46175796f547a5967a30871.jpg',
-  Recipes: [{
-    recipe: '솥밥을 만들기위해 쌀 2인분은 미리 깨끗이 씻어 30분여정도 불려줍니다.'
-  },{
-    recipe: '한우 불고깃감은 듬성듬성 썰어주었어요~'
-  },{
-    recipe: '연근은 원형 모양을 살리면 좀 큰 듯 싶어서 1/2등분후 얇게 슬라이스하고 식촛물에 담궈 잡내를 없애주었습니다.'
-  }],
+  serve: data.serve,
+  category: data.category,
+  Ingredients: data.ingredients,
+  image: data.image,
+  Recipes: data.recipes,
   link: 'https://www.10000recipe.com/recipe/6878480'
-}
+});
 
 const reducer = (state=initialState, action:any) => {
   switch(action.type){
@@ -83,7 +65,7 @@ const reducer = (state=initialState, action:any) => {
     case ADD_POST_SUCCESS:
       return {
         ...state,
-        mainPosts: [dummyPost, ...state.mainPosts],
+        mainPosts: [dummyPost(action.data), ...state.mainPosts],
         addPostLoading: false,
         addPostDone: true,
       }
@@ -92,25 +74,6 @@ const reducer = (state=initialState, action:any) => {
         ...state,
         addPostLoading: false,
         addPostError: action.error,
-      }
-    case ADD_COMMENT_REQUEST:
-      return {
-        ...state,
-        addCommentLoading: true,
-        addCommentDone: false,
-        addCommentError: null,
-      }
-    case ADD_COMMENT_SUCCESS:
-      return {
-        ...state,
-        addCommentLoading: false,
-        addCommentDone: true,
-      }
-    case ADD_COMMENT_FAILURE:
-      return {
-        ...state,
-        addCommentLoading: false,
-        addCommentError: action.error,
       }
     default:
       return state;
