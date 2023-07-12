@@ -2,7 +2,7 @@ import styled from 'styled-components';
 import { Button } from 'antd';
 
 export const SignUpBtn = styled(Button)`
-  background-color: #617a55;
+  background-color: #8294c4;
   color: white;
   border: none;
 

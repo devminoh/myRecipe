@@ -10,9 +10,6 @@ import {
   // REMOVE_POST_SUCCESS,
   // REMOVE_POST_FAILURE,
   // REMOVE_POST_REQUEST,
-  ADD_COMMENT_SUCCESS,
-  ADD_COMMENT_FAILURE,
-  ADD_COMMENT_REQUEST,
   // generateDummyPost,
 } from "../reducers/post";
 // import { ADD_POST_TO_ME, REMOVE_POST_OF_ME } from "../reducers/user";
@@ -47,17 +44,17 @@ function addPostAPI(data:any) {
 }
 
 function* addPost(action:any) {
-  console.log(action);
   try{
     // const result = yield call(addPostAPI, action.data)
     yield delay(1000);
     const id = shortId.generate();
     yield put({
       type: ADD_POST_SUCCESS,
-      data: {
-        id,
-        content: action.data,
-      }
+      // data: {
+      //   id,
+      //   content: action.data,
+      // }
+      data: action.data,
     });
     // yield put({
     //   type: ADD_POST_TO_ME,
@@ -97,26 +94,6 @@ function* addPost(action:any) {
 //   }
 // }
 
-//addComment
-function addCommentAPI(data:any) {
-  return axios.post(`/api/post/${data.postId}/comment`, data);
-}
-
-function* addComment(action:any) {
-  try{
-    // const result = yield call(addCommentAPI, action.data)
-    yield delay(1000);
-    yield put({
-      type: ADD_COMMENT_SUCCESS,
-      data: action.data,
-    });
-  } catch(err:any) {
-    yield put({
-      type: ADD_COMMENT_FAILURE,
-      error: err.response.data
-    })
-  }
-}
 
 function* watchAddPost() {
   yield takeLatest(ADD_POST_REQUEST, addPost);
@@ -130,15 +107,11 @@ function* watchAddPost() {
 //   yield takeLatest(REMOVE_POST_REQUEST, removePost);
 // }
 
-function* watchAddComment() {
-  yield takeLatest(ADD_COMMENT_REQUEST, addComment);
-}
 
 export default function* postSaga() {
   yield all([
     fork(watchAddPost), 
     // fork(watchLoadPosts), 
-    // fork(watchRemovePost), 
-    fork(watchAddComment)
+    // fork(watchRemovePost),
   ]);
 }

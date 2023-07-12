@@ -18,14 +18,14 @@ export const Head = styled.div`
   align-items: center;
 
   a {
-    color: #a4d0a4;
+    color: #8294c4;
     font-size: 30px;
     font-weight: 700;
     text-decoration: none;
     margin-top: 20px;
 
     &:hover {
-      color: #617a55;
+      color: #acb1d6;
     }
   }
 
@@ -78,16 +78,23 @@ export const LogoutBtn = styled.div`
   
   div{
     cursor: pointer;
-    color: red;
+    color: #8294c4;
     font-size: 15px;
+    font-weight: 700;
     margin-right: 20px;
+    &:hover{
+      color: #E76161;
+    }
   }
 `;
 
 export const createBtn = styled.button`
-  background-color: #617a55;
+  background-color: #8294c4;
   padding: 5px 15px;
   color: white;
   border-radius: 3px;
   cursor: pointer;
+  &:hover {
+    background-color: #acb1d6;
+  }
 `;

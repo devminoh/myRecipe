@@ -7,14 +7,13 @@ import Link from 'next/link';
 import { Image, Space, Tag } from 'antd';
 
 export interface AboutPropTypes {
-  pid: any;
+  pid: string;
 }
 
 const AboutLayout = ({ pid }: AboutPropTypes) => {
 
   const posts = useSelector((state:any)=> state.post.mainPosts);
   const post = posts.filter((post:any) => post.id == pid)[0];
-  console.log(post)
 
   return(
     <div>

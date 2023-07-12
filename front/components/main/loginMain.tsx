@@ -7,7 +7,7 @@ import { useSelector } from 'react-redux';
 {/* xs:mobile, sm: tablet, md: 작은 데스크탑 */}
 const LoginMain = () => {
   const { mainPosts } = useSelector((state:any)=> state.post)
-  
+  console.log(mainPosts)
   return(
     <div>
       {/* <Row gutter={8}>
