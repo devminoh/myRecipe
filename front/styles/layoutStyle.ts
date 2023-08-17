@@ -5,7 +5,9 @@ import Link from 'next/link';
 const { Content, Sider } = Layout;
 
 export const Container = styled(Layout)`
+display: flex;
   height: 100vh;
+  /* width: 520px; */
 `;
 
 export const Head = styled.div`

@@ -1,19 +1,29 @@
 import React from 'react';
 import * as style from '../styles/createStyle';
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 import { useParams } from "react-router-dom";
 import Link from 'next/link';
 
 import { Image, Space, Tag } from 'antd';
+import { useCallback } from 'react';
+import { REMOVE_POST_REQUEST } from '../reducers/post';
 
 export interface AboutPropTypes {
   pid: string;
 }
 
 const AboutLayout = ({ pid }: AboutPropTypes) => {
-
+  const dispatch = useDispatch();
   const posts = useSelector((state:any)=> state.post.mainPosts);
+  const {removePostLoading } = useSelector((state:any)=> state.post);
   const post = posts.filter((post:any) => post.id == pid)[0];
+
+  const onRemovePost = useCallback(() => {
+    dispatch({
+      type: REMOVE_POST_REQUEST,
+      data: pid,
+    })
+  }, []);
 
   return(
     <div>
@@ -61,7 +71,7 @@ const AboutLayout = ({ pid }: AboutPropTypes) => {
     <style.Btns>
       {pid && (
         <>
-          <style.Cancle>삭제하기</style.Cancle>
+          <style.Cancle onClick={onRemovePost}>삭제하기</style.Cancle>
           <style.Submit>
             수정하기
           </style.Submit>

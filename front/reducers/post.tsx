@@ -1,38 +1,59 @@
 import shortId from 'shortid';
+import { produce } from 'immer';
+import { faker } from "@faker-js/faker";
+faker.seed(123);
 
 export const initialState = {
-  mainPosts: [{
-    id: 1,
-    User: {
-      id: 1,
-      nickname: '제로초',
-    },
-    serve: 1,
-    category: '양식',
-    Ingredients: [{
-      name: '박력분 200g'
-    },{
-      name: '계란 2알',
-    }],
-    image: 'https://src.hidoc.co.kr/image/lib/2020/11/9/1604911318873_0.jpg',
-    Recipes: [{
-      recipe: '1번 레시피'
-    },{
-      recipe: '2번 레시피'
-    },{
-      recipe: '3번 레시피'
-    }],
-    link: 'https://www.10000recipe.com/recipe/6895534'
-  }],
+  mainPosts: [],
   imagePaths: '',
+  hasMorePosts: true,
+  loadPostsLoading: false,
+  loadPostsDone: false,
+  loadPostsError: null,
   addPostLoading: false,
   addPostDone: false,
-  addPostError: false,
+  addPostError: null,
+  removePostLoading: false,
+  removePostDone: false,
+  removePostError: null,
 }
+
+export const generateDummyPost = (number: number) => Array(number).fill().map(()=> ({
+  id: shortId.generate(),
+  User: {
+    id: shortId.generate(),
+    nickname: faker.internet.userName(),
+  },
+  serve: 2,
+  category: '양식',
+  Ingredients: [{
+      name: faker.lorem.paragraph(),
+    },{
+      name: faker.lorem.paragraph(),
+    }],
+    image: faker.image.url(),
+    Recipes: [{
+      recipe: faker.lorem.sentence()
+    },{
+      recipe: faker.lorem.sentence()
+    },{
+      recipe: faker.lorem.sentence()
+    }],
+    link: faker.lorem.sentence()
+}));
+
+// initialState.mainPosts = initialState.mainPosts.concat(generateDummyPost(10));
+export const LOAD_POSTS_REQUEST = "LOAD_POSTS_REQUEST";
+export const LOAD_POSTS_SUCCESS = "LOAD_POSTS_SUCCESS";
+export const LOAD_POSTS_FAILURE = "LOAD_POSTS_FAILURE";
 
 export const ADD_POST_REQUEST = "ADD_POST_REQUEST";
 export const ADD_POST_SUCCESS = "ADD_POST_SUCCESS";
 export const ADD_POST_FAILURE = "ADD_POST_FAILURE";
+
+export const REMOVE_POST_REQUEST = "REMOVE_POST_REQUEST";
+export const REMOVE_POST_SUCCESS = "REMOVE_POST_SUCCESS";
+export const REMOVE_POST_FAILURE = "REMOVE_POST_FAILURE";
 
 export const addPost = (data: any)=>({
   type: ADD_POST_REQUEST,
@@ -40,10 +61,10 @@ export const addPost = (data: any)=>({
 })
 
 export const dummyPost = (data:any)=>({
-  id: shortId.generate(),
+  id: data.id,
   User: {
-    id: 2,
-    nickname: '부기초',
+    id: 1,
+    nickname: 'zerocho',
   },
   serve: data.serve,
   category: data.category,
@@ -54,30 +75,56 @@ export const dummyPost = (data:any)=>({
 });
 
 const reducer = (state=initialState, action:any) => {
-  switch(action.type){
-    case ADD_POST_REQUEST:
-      return {
-        ...state,
-        addPostLoading: true,
-        addPostDone: false,
-        addPostError: null,
-      }
-    case ADD_POST_SUCCESS:
-      return {
-        ...state,
-        mainPosts: [dummyPost(action.data), ...state.mainPosts],
-        addPostLoading: false,
-        addPostDone: true,
-      }
-    case ADD_POST_FAILURE:
-      return {
-        ...state,
-        addPostLoading: false,
-        addPostError: action.error,
-      }
-    default:
-      return state;
-  }
+  return produce(state, (draft:any) => {
+    switch(action.type){
+      case LOAD_POSTS_REQUEST:
+        draft.loadPostsLoading = true;
+        draft.loadPostsDone = false;
+        draft.loadPostsError = null;
+        break;
+      case LOAD_POSTS_SUCCESS:
+        draft.loadPostsLoading = false;
+        draft.loadPostsDone = true;
+        draft.mainPosts = action.data.concat(draft.mainPosts);
+        draft.hasMorePosts = draft.mainPosts.length < 50;
+        break;
+      case LOAD_POSTS_FAILURE:
+        draft.loadPostsLoading = false;
+        draft.loadPostsError = action.error;
+        break;
+      case ADD_POST_REQUEST:
+        draft.addPostLoading = true;
+        draft.addPostDone = false;
+        draft.addPostError = null;
+        break;
+      case ADD_POST_SUCCESS:
+        draft.addPostLoading = false;
+        draft.addPostDone = true;
+        draft.mainPosts.unshift(dummyPost(action.data));
+        break;
+      case ADD_POST_FAILURE:
+        draft.addPostLoading = false;
+        draft.addPostError = action.error;
+        break;
+      case REMOVE_POST_REQUEST:
+        draft.removePostLoading = true;
+        draft.removePostDone = false;
+        draft.removePostError = null;
+        break;
+      case REMOVE_POST_SUCCESS:
+        draft.mainPosts = draft.mainPosts.filter((v:any)=> v.id !== action.data);
+        draft.removePostLoading = false;
+        draft.removePostDone = true;
+        break;
+      case REMOVE_POST_FAILURE:
+        draft.removePostLoading = false;
+        draft.removePostError = action.error;
+        break;
+      default:
+        return state;
+    }
+  });
+
 };
 
 export default reducer;
