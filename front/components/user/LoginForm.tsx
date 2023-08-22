@@ -7,16 +7,21 @@ import Link from "next/link";
 import { Input } from 'antd';
 import { useSelector, useDispatch } from 'react-redux';
 import { loginRequestAction } from '../../reducers/user';
+import { useRouter } from 'next/router';
 
 const LoginForm = () => {
   const dispatch = useDispatch();
-  const { isLoggingIn }= useSelector((state:any)=> state.user);
+  const router = useRouter();
+  const { logInLoading, logInDone }= useSelector((state:any)=> state.user);
   const [email, onChangeEmail] = useInput("");
   const [password, onChangePassword] = useInput("");
 
   const onSubmitForm = useCallback(() => {
     console.log(email,password);
     dispatch(loginRequestAction({ email, password }));
+    if(logInDone) {
+      router.push('/')
+    }
   },[email, password]);
 
   return (
@@ -43,7 +48,7 @@ const LoginForm = () => {
         </div>
         <style.ButtomWrapper>
           <style.LoginBtn htmlType="submit"
-          loading={isLoggingIn}>
+          loading={logInLoading}>
             로그인
           </style.LoginBtn>
           <Link href="/signup">

@@ -21,7 +21,7 @@ export const SumContainer = styled.div`
     display: none;
   } */
   button {
-    border: 1px dotted #617a55;
+    border: 1px dotted #8294c4;
     padding: 50px;
     border-radius: 5px;
   }
@@ -34,7 +34,7 @@ export const SumContainer = styled.div`
   }
   .deleteImg {
     margin-top: 5px;
-    background-color: #617a55;
+    background-color: #8294c4;
     color: white;
     border: none;
     border-radius: 12px;
@@ -47,7 +47,7 @@ export const SumContainer = styled.div`
 export const Title = styled.div`
   font-size: 20px;
   font-weight: 800;
-  color: #617a55;
+  color: #8294c4;
   margin: 10px 0;
 `;
 
@@ -67,7 +67,7 @@ export const Serve = styled.div`
 `;
 
 export const ServeShow = styled.div`
-  color: #c07f00;
+  color: #D8C4B6;
   font-size: 15px;
 `;
 export const Select = styled.select`
@@ -93,7 +93,7 @@ export const Category = styled.div`
   width: 200px;
   div {
     width: 200px;
-    color: #c07f00;
+    color: #D8C4B6;
     font-size: 20px;
     display: flex;
     justify-content: flex-end;
@@ -111,10 +111,10 @@ export const IngredientWrapper = styled.div`
   height: fit-content;
 
   .plus {
-    border: 1px dashed black;
+    border: 1px dashed #8294c4;
     padding: 3px 5px;
     border-radius: 5px;
-    background-color: #f7e1ae;
+    background-color: #ffead2;
     margin: 10px 15px;
   }
 `;
@@ -130,13 +130,13 @@ export const TagWrapper = styled.div`
     position: absolute;
     top: 6px;
     right: 5px;
-    border: 1px solid #617a55;
+    border: 1px solid #8294c4;
     border-radius: 3px;
     padding: 3px 7px;
-    background-color: #f7e1ae;
+    background-color: #ffead2;
     &:focus {
       border: 1px solid red;
-      background-color: #f7e1ae;
+      background-color: #ffead2;
     }
   }
   button {
@@ -146,7 +146,7 @@ export const TagWrapper = styled.div`
     align-items: center;
     justify-content: center;
     font-weight: 700;
-    color: #617a55;
+    color: #8294c4;
     &:hover {
       color: red;
     }
@@ -163,15 +163,15 @@ export const recipeWrapper = styled.div`
 
   .index {
     padding: 5px 10px;
-    background-color: #f7e1ae;
+    background-color: #ffead2;
     margin-right: 5px;
     border-radius: 50%;
-    color: #617a55;
+    color: #8294c4;
     font-weight: 700;
   }
 
   .content {
-    color: #c07f00;
+    color: #acb1d6;
     font-size: 20px;
   }
 `;
@@ -185,15 +185,15 @@ export const recipeAboutWrapper = styled.div`
 
     .index {
       padding: 8px 10px;
-      background-color: #f7e1ae;
+      background-color: #ffead2;
       margin-right: 5px;
       border-radius: 50%;
-      color: #617a55;
+      color: #8294c4;
       font-weight: 700;
     }
 
     .content {
-      color: #c07f00;
+      color: #787a91;
       font-size: 20px;
     }
   }
@@ -230,14 +230,14 @@ export const PlusInput = styled.div`
     align-items: center;
     cursor: pointer;
     font-weight: 800;
-    background-color: #f7e1ae;
+    background-color: #ffead2;
     color: #667085;
     border-radius: 50%;
     width: 30px;
     height: 30px;
     &:hover {
-      background-color: #617a55;
-      color: #f7e1ae;
+      background-color: #8294c4;
+      color: #ffead2;
     }
   }
 `;
@@ -254,8 +254,8 @@ export const Btns = styled.div`
 `;
 export const Cancle = styled.div`
   width: 10vw;
-  border: 1px solid #617a55;
-  color: #617a55;
+  border: 1px solid #8294c4;
+  color: #8294c4;
   background-color: white;
   border-radius: 12px;
   padding: 1.3vh 1.4vw;
@@ -269,7 +269,7 @@ export const Cancle = styled.div`
 `;
 export const Submit = styled.button`
   width: 10vw;
-  background-color: #617a55;
+  background-color: #8294c4;
   color: white;
   border: none;
   border-radius: 12px;
