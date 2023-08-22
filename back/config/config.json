@@ -1,0 +1,23 @@
+{
+  "development": {
+    "username": "root",
+    "password": "Jy1617gm!",
+    "database": "my-recipe",
+    "host": "127.0.0.1",
+    "dialect": "mysql"
+  },
+  "test": {
+    "username": "root",
+    "password": null,
+    "database": "my-recipe",
+    "host": "127.0.0.1",
+    "dialect": "mysql"
+  },
+  "production": {
+    "username": "root",
+    "password": null,
+    "database": "my-recipe",
+    "host": "127.0.0.1",
+    "dialect": "mysql"
+  }
+}
