@@ -12,7 +12,7 @@ const Home: NextPage = () => {
   const { me } = useSelector((state:any)=> state.user);
   const { mainPosts, hasMorePosts, loadPostsLoading } = useSelector((state:any)=> state.post);
   const id = useSelector((state:any)=> state.post.mainPosts);
-  
+  console.log(me)
   useEffect(() => {
     dispatch({
       type: LOAD_POSTS_REQUEST,

@@ -11,6 +11,7 @@ import {
   LOG_OUT_REQUEST,
   SIGN_UP_REQUEST,
 } from '../reducers/user';
+import { ServerResponse } from "http";
 
 export interface actionType {
   data: any;
@@ -19,17 +20,15 @@ export interface actionType {
 
 // login
 function logInAPI(data: any) {
-  return axios.post('/api/login', data);
+  return axios.post('/user/login', data);
 }
 
 function* logIn(action: actionType) {
   try {
-    // const result = yield call(logInAPI, action.data);
-    yield delay(1000);
+    const result: ServerResponse = yield call(logInAPI, action.data);
     yield put({
       type: LOG_IN_SUCCESS,
-      data: action.data,
-      // data: result.data,
+      data: result.data,
     });
   } catch (err:any) {
     yield put({
@@ -41,7 +40,7 @@ function* logIn(action: actionType) {
 
 //logout
 function logOutAPI(data: any) {
-  return axios.post('/api/logout', data);
+  return axios.post('/logout', data);
 }
 
 function* logOut() {
@@ -60,15 +59,21 @@ function* logOut() {
   }
 }
 
-// signUp
-function signUpAPI(data:any) {
-  return axios.post('/api/signUp', data);
+interface signUpData {
+  email: string;
+  password: string;
+  nickname: string;
 }
 
-function* signUp() {
+// signUp
+function signUpAPI(data: signUpData) {
+  return axios.post('/user', data);
+}
+
+function* signUp(action: any) {
   try {
-    // const result = yield call(signUpAPI);
-    yield delay(1000);
+    const result: ServerResponse = yield call(signUpAPI, action.data);
+    console.log(result)
     yield put({
       type: SIGN_UP_SUCCESS,
       // data: result.data,
