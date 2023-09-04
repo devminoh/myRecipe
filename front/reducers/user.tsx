@@ -19,7 +19,7 @@ export const initialState = {
   changeNicknameLoading: false, // 닉변 시도중
   changeNicknameDone: false,
   changeNicknameError: null,
-  me: {Posts: [{}]},
+  me: null,
   signUpData: {},
   loginData: {},
 };
@@ -100,7 +100,7 @@ const reducer = (state = initialState, action: { type: any; data: any; error: nu
       case LOG_OUT_SUCCESS:
         draft.logOutLoading = false;
         draft.logOutDone = true;
-        draft.me = {Posts: [{}]};
+        draft.me = null;
         break;
       case LOG_OUT_FAILURE:
         draft.logOutLoading = false;

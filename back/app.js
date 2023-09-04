@@ -1,11 +1,30 @@
 const express = require("express");
+const cors = require('cors');
+
 const postRouter = require("./routes/post");
+const userRouter = require("./routes/user");
+const db = require('./models');
+const passportConfig = require('./passport');
 
 const app = express();
+db.sequelize.sync()
+  .then(()=>{
+    console.log('db 연결성공');
+  })
+  .catch(console.error);
 
-app.get('/', (req,res)=> [
+passportConfig();
+
+app.use(cors({
+  origin: true,
+  credentials: false,
+}));
+app.use(express.json())
+app.use(express.urlencoded({ extended: true }));
+
+app.get('/', (req,res)=> {
   res.send('hello express')
-])
+})
 
 app.get("/posts", (req, res) => {
   res.json([
@@ -17,7 +36,7 @@ app.get("/posts", (req, res) => {
 });
 
 app.use("/post", postRouter); // prefix
-
+app.use("/user", userRouter);
 //app.get => 가져오다
 //app.post => 생성
 //app.put => 전체 수정 (잘 안씀)
